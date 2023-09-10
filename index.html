@@ -19,9 +19,16 @@
       methods: {
         increment() {
           this.counter++;
+        }, 
+        decrement() {
+          this.counter--;
         }
       },
-      template: `<button v-on:click="increment">{{ counter }}</button>`,
+      template: `
+      <p>{{ counter }}</p>
+      <button v-on:click="increment">+</button>
+      <button v-on:click="decrement">-</button>
+      `,
     }).mount('#app');
   </script>
 </body>
