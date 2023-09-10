@@ -10,7 +10,7 @@
   <script src="https://unpkg.com/vue@next"></script>
   <div id="app"></div>
   <script>
-    const vm = Vue.createApp({
+    const app = Vue.createApp({
       data() {
         return {
           text: "Puerta cerrada",
@@ -56,10 +56,11 @@
         <div v-if="open">
           <p>Hola, {{ username }}</p> 
           <div class="list">
-            <div v-for="(item, i) in posts" :key="i" class="item">
-              <h4 class="title">{{ item.title }}</h4>
-              <p>{{ item.description }}</p>
-            </div>
+            <item 
+              v-for="(item, i) in posts" 
+              :key="i"
+              :post="item" 
+            />
           </div>
         </div>
         <div v-else>
@@ -73,7 +74,17 @@
         </button>
       </div>
       `
-    }).mount("#app");
+    })
+    app.component("item", {
+      props: ['post'],
+      template: `
+      <div class="item">
+        <h4 class="title">{{ post.title }}</h4>
+        <p>{{ post.description }}</p>
+      </div>
+      `
+      });
+    const vm = app.mount("#app");
   </script>
   <style>
     html, body {
