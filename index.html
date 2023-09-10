@@ -13,20 +13,22 @@
     const vm = Vue.createApp({
       data() {
         return {
-          text: 'Hola vue'
+          firstName: 'David', 
+          lastName: 'Espino',
+          now: new Date(),
         };
       },
-      methods: {
-        updateText(e) {
-          this.text = e.target.value;
+      computed: {
+        fullName() {
+          return this.firstName + ' ' + this.lastName;
+        },
+        today() {
+          return this.now.toLocaleDateString();
         }
       },
       template: `
-      <p>{{ text }}</p>
-      <input 
-        type="text"
-        @change="updateText" 
-      />
+      <p>{{ fullName }}</p>
+      <p>{{ today }}</p>
       `,
     }).mount('#app');
   </script>
