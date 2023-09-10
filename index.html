@@ -14,8 +14,22 @@
       data() {
         return {
           text: "Puerta cerrada",
-          open: false,
-          username: '',
+          open: true,
+          username: 'David',
+          posts: [
+            {
+              title: 'Título 1',
+              description: 'Descripción 1'
+            },
+            {
+              title: 'Título 2',
+              description: 'Descripción 2'
+            },
+            {
+              title: 'Título 3',
+              description: 'Descripción 3'
+            },
+          ]
         };
       },
       watch: {
@@ -40,11 +54,18 @@
       <div class="container" :class="styles">
         <h2>{{ text }}</h2>
         <div v-if="open">
-          <p>Hola, {{ username }}</p>  
+          <p>Hola, {{ username }}</p> 
+          <div class="list">
+            <div v-for="(item, i) in posts" :key="i" class="item">
+              <h4 class="title">{{ item.title }}</h4>
+              <p>{{ item.description }}</p>
+            </div>
+          </div>
         </div>
         <div v-else>
-          <label>Username</p>  
-          <input type="text" v-model="username"/>
+          <label>  
+            Username <input type="text" v-model="username"/>
+          </label>
         </div>
         <button @click="open = !open">
           <div v-if="!open">Get in</div>
@@ -80,6 +101,13 @@
     }
     .open {
       background-color: #b5e7a0;
+    }
+    .list {
+      display: flex;
+      flex-direction: column;
+    }
+    .item {
+      border: 1px solid gray;
     }
   </style>
 </body>
